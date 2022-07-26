@@ -2,24 +2,22 @@ import axios from 'axios'
 import React from 'react'
 import AfterLoginHeader from '../Components/AfterLoginHeader'
 import {URL} from '../config';
+import useParams from "react-router-dom";
 
 
 export const LoginSuccessful = () => {
-//   const params = new URLSearchParams(window. location. search)
-// params.has('code')
-// params.get('code')
-// params.has('state')
-// params.get('state')
-// const paramss = new URLSearchParams(window. location. search)
  
-//     console. log(paramss) 
 
-let link = URL+"/loginSuccessful";
-axios.post(link).then((response) => {
-  const link = response.data;
-  console.log("Link => " +link);
- // setLink(link);
-})
+// let link = URL+"/loginSuccessful";
+// axios.post(link).then((response) => {
+//   const link = response.data;
+//   console.log("Link => " +link);
+//  // setLink(link);
+// })
+
+// let {code, state} = useParams();
+
+
 
 
 
@@ -33,6 +31,12 @@ axios.post(link).then((response) => {
                     style={{ textAlign: "center", fontWeight: 'bolder' }}>
                     Logged in Successfully!
                 </h1>
+                {/* <div> Auth Code : {code}</div>
+                <div> State : {state}</div> */}
+
+                {/* <div>Code = {JSON.stringify(code)}</div> */}
+                {/* <div>State = {JSON.stringify(state)}</div> */}
+
             </div>
     </div>
   )

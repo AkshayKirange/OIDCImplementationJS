@@ -49,7 +49,7 @@ const base64Digest = crypto
   .createHash("sha256")
   .update(codeVerifier)
   .digest("base64");
-console.log("Base64 Digest=code verifier: "+base64Digest);
+//console.log("Base64 Digest=code verifier: "+base64Digest);
 
 const codeChallenge = base64url.fromBase64(base64Digest);
 
@@ -66,10 +66,16 @@ const apiHmac = crypto.createHmac('sha256', aesKey)
 // Defining encoding type
 .digest('base64');
 // Printing the output
-console.log("Hmac value Obtained is: ", apiHmac);
+//console.log("Hmac value Obtained is: ", apiHmac);
 
 
 //const apiHmac = crypto.createHmac('SHA256', {aesKey}).update({inputValue}).digest('base64');
+
+
+
+const link = "https://up.epramaan.in/openid/jwt/processJwtAuthGrantRequest.do?&scope=" + scope + "&response_type=" + responseType + "&redirect_uri=" + redirectUri + "&state=" + stateId + "&code_challenge_method=" + codeChallengeMethod + "&nonce=" + nonceValue + "&client_id=" + clientId + "&code_challenge=" + codeChallenge + "&request_uri=" + requestUri + "&apiHmac=" + apiHmac + "";
+
+console.log("Link = " + link);
 
 console.log("stateId = " + stateId);
 console.log("nonce = " + nonceValue);
@@ -77,11 +83,6 @@ console.log("codeVerifier = " + codeVerifier);
 console.log("codeChallenge = " + codeChallenge);
 console.log("apiHmac = " + apiHmac);
 console.log("inputValue = " + inputValue);
-
-
-const link = "https://up.epramaan.in/openid/jwt/processJwtAuthGrantRequest.do?&scope=" + scope + "&response_type=" + responseType + "&redirect_uri=" + redirectUri + "&state=" + stateId + "&code_challenge_method=" + codeChallengeMethod + "&nonce=" + nonceValue + "&client_id=" + clientId + "&code_challenge=" + codeChallenge + "&request_uri=" + requestUri + "&apiHmac=" + apiHmac + "";
-
-console.log(link);
 
 response.send(link);
 

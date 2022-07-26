@@ -43,6 +43,7 @@ const Login = () => {
 
   const loginEpramann = () => {
     
+    
     //const body = link;
     
    // Navigate(link);
@@ -125,7 +126,7 @@ const Login = () => {
                 {/* <a href="www.google.com" >Login using e-pramaan</a>
                 {/* <Link to="/forgotpassword" style={{color:'#5C0632'}}>Login using e-pramaan</Link> }*/}
               </div> 
-              <button onClick={loginEpramann} className="btn btn-primary" style={{marginTop:'20px', width:'500px',backgroundColor:'#5C0632'}}>
+              <button onClick={userAction} className="btn btn-primary" style={{marginTop:'20px', width:'500px',backgroundColor:'#5C0632'}}>
                 Login using e-Pramaan
               </button>
                 <button  className="btn btn-primary" style={{marginTop:'20px', width:'500px',backgroundColor:'#5C0632'}}>

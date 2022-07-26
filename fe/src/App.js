@@ -20,6 +20,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+     
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -31,9 +32,12 @@ function App() {
           <Route path="/FAQs" element={<FAQs />}></Route>
           <Route path="/loginSuccessful" element={<LoginSuccessful />}></Route>
           <Route path="/*" element={<AnyPage />}></Route>
+          {/* <Route path="/:code/:state" exact><LoginSuccessful /></Route> */}
+          <Route path="/loginSuccessful/:code/:state" exact component={<LoginSuccessful/>} />;
 
           
         </Routes>
+        
       </BrowserRouter>
       <ToastContainer theme="colored" />
     </div>
