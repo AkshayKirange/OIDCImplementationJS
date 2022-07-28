@@ -27,14 +27,6 @@ const Login = () => {
       console.log("Link => " +link);
       setLink(link);
 
-
-      // if (result["status"] == "success") {
-      //   setOffers(result["data"]);
-      //   toast.success("Checkout Special offers");
-      // } else {
-      //   toast.warning("No offer available now");
-      //   navigate("/loginhome");
-      // }
     });
   }
 
@@ -58,18 +50,18 @@ const Login = () => {
 
   }     
 
-  const userAction = async () => {
-    const response = await fetch(window.location.href = link, {
-      method: 'POST',
-      body: link, // string or object
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const myJson = await response.json(); //extract JSON from the http response
-    // do something with myJson
-    console.log("Data => "+myJson);
-  }
+  // const userAction = async () => {
+  //   const response = await fetch(window.location.href = link, {
+  //     method: 'POST',
+  //     body: link, // string or object
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   });
+  //   const myJson = await response.json(); //extract JSON from the http response
+  //   // do something with myJson
+  //   console.log("Data => "+myJson);
+  // }
 
   return (
     <div className='row d-flex' style={{"width":'100%',"height":'100%',backgroundColor:'#E5E4E2'}}>
@@ -126,13 +118,13 @@ const Login = () => {
                 {/* <a href="www.google.com" >Login using e-pramaan</a>
                 {/* <Link to="/forgotpassword" style={{color:'#5C0632'}}>Login using e-pramaan</Link> }*/}
               </div> 
-              <button onClick={userAction} className="btn btn-primary" style={{marginTop:'20px', width:'500px',backgroundColor:'#5C0632'}}>
+              <button onClick={LinkURL} className="btn btn-primary" style={{marginTop:'20px', width:'500px',backgroundColor:'#5C0632'}}>
                 Login using e-Pramaan
               </button>
                 <button  className="btn btn-primary" style={{marginTop:'20px', width:'500px',backgroundColor:'#5C0632'}}>
                 Signin
               </button>
-              <a href={link} onClick={userAction} >Login using epramaan</a>
+              <a href={link}  >Login using epramaan</a>
             </div>
           </div>
         </div>

@@ -17,6 +17,16 @@ export const LoginSuccessful = () => {
 
 // let {code, state} = useParams();
 
+//Code to consume response of the redirected uri
+
+// fetch(url, { method: 'POST', redirect: 'follow'})
+//     .then(response => {
+//         // HTTP 301 response
+//     })
+//     .catch(function(err) {
+//         console.info(err + " url: " + url);
+//     });
+
 
 
 

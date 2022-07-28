@@ -2,6 +2,9 @@ const { response } = require('express');
 const express=require('express');
 const jwt=require('jsonwebtoken');
 const app=express();
+// import cryptoRandomString from 'crypto-random-string';
+//const cryptoRandomString = require('crypto-random-string');
+
 
 const cors = require('cors')
 app.use(cors('*'))
@@ -43,8 +46,10 @@ const nonceValue=crypto.randomUUID();
 
 const randomString = require("randomstring");
 const base64url = require("base64url");
-const codeVerifier = crypto.randomUUID()
-//randomString.generate(16);
+// const codeVerifier = crypto.randomUUID()
+// randomString.generate(16);
+const codeVerifier = crypto.randomBytes(24).toString('hex');
+// const codeVerifier = cryptoRandomString();
 const base64Digest = crypto
   .createHash("sha256")
   .update(codeVerifier)
@@ -86,6 +91,9 @@ console.log("inputValue = " + inputValue);
 
 response.send(link);
 
+console.log("codeVerifier = " + codeVerifier);
+
+
 
 });
 
@@ -109,7 +117,15 @@ app.get('/codechallenge1',(req,res)=>
 
 
 
+//Code to consume response of the redirected uri
 
+// fetch(url, { method: 'POST', redirect: 'follow'})
+//     .then(response => {
+//         // HTTP 301 response
+//     })
+//     .catch(function(err) {
+//         console.info(err + " url: " + url);
+//     });
 
 
 
