@@ -2,11 +2,16 @@ import axios from 'axios'
 import React from 'react'
 import AfterLoginHeader from '../Components/AfterLoginHeader'
 import {URL} from '../config';
-import useParams from "react-router-dom";
+import useParams, { Link } from "react-router-dom";
 
 
 export const LoginSuccessful = () => {
  
+  // const authCode = req.query.code;
+  // const stateId = req.query.state;
+  // console.log("in loginSuccessful api");
+  // console.log("authCode => " + authCode);
+  // console.log("stateId => " + stateId);
 
 // let link = URL+"/loginSuccessful";
 // axios.post(link).then((response) => {
@@ -27,6 +32,19 @@ export const LoginSuccessful = () => {
 //         console.info(err + " url: " + url);
 //     });
 
+const login = () => {
+
+  // fetch(Link, { method: 'POST', redirect: 'follow'})
+  //   .then(response => {
+  //       // HTTP 301 response
+  //       console.log(response.headers)
+  //   })
+  //   .catch(function(err) {
+  //       console.info(err + " url: " + link);
+  //   });
+
+
+}
 
 
 

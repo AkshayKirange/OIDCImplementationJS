@@ -18,22 +18,68 @@ const styles={
 
 
 const Login = () => {
-  const [link, setLink] = useState([]);
+  
+  
+
+  const [link, setLink] = useState('');
+  // const [clientId, setClientId] = useState([]);
+  // const [stateId, setStateId] = useState([]);
+  // const [scope, setScope] = useState([]);
+  const [nonceValue, setNonceValue] = useState([]);
+  // const [requestUri, setrequestUri] = useState([]);
+  // const [redirectUri, setredirectUri] = useState([]);
+  // const [responseType, setresponseType] = useState([]);
+  // const [aesKey, setaesKey] = useState([]);
+  const [codeVerifier, setcodeVerifier] = useState([]);
+  // const [codeChallenge, setcodeChallenge] = useState([]);
+  // const [codeChallengeMethod, setcodeChallengeMethod] = useState([]);
+  // const [apiHmac, setapiHmac] = useState([]);
 
   function LinkURL() {
+  
     const url = `${URL}/linkURL`;
     axios.post(url).then((response) => {
-      const link = response.data;
-      console.log("Link => " +link);
-      setLink(link);
+      
+      const data = response.data;
+      console.log(data);
+      sessionStorage.setItem('link', JSON.stringify(data[0]));
+      localStorage.setItem('clientId', JSON.stringify(data[1]));
+      localStorage.setItem('stateId', JSON.stringify(data[2]));
+      localStorage.setItem('scope', JSON.stringify(data[3]));
+      localStorage.setItem('nonceValue', JSON.stringify(data[4]));
+      localStorage.setItem('requestUri', JSON.stringify(data[5]));
+      localStorage.setItem('redirectUri', JSON.stringify(data[6]));
+      localStorage.setItem('responseType', JSON.stringify(data[7]));
+      localStorage.setItem('aesKey', JSON.stringify(data[8]));
+      localStorage.setItem('codeVerifier', JSON.stringify(data[9]));
+      localStorage.setItem('codeChallenge', JSON.stringify(data[10]));
+      localStorage.setItem('codeChallengeMethod', JSON.stringify(data[11]));
+      localStorage.setItem('apiHmac', JSON.stringify(data[12]));
+      localStorage.setItem('inputValue', JSON.stringify(data[13]));
+      
+      sessionStorage.setItem("link", data[0]);
+      
+
+
+
+      console.log("codeVerifier = "+ codeVerifier);
+      //localStorage.removeItem(key);
+      //localStorage.clear();
+      //let lastname = localStorage.getItem(key);
+      //localStorage.setItem(key, value);
+      const hre = localStorage.getItemItem('link');
 
     });
+    const link = localStorage.getItem("link");
+
+
   }
 
-  useEffect(LinkURL, []);
 
+  useEffect(LinkURL,
+     []);
 
-  const loginEpramann = () => {
+ const loginEpramann = () => {
     
     
     //const body = link;

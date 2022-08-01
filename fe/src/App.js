@@ -33,7 +33,7 @@ function App() {
           <Route path="/loginSuccessful" element={<LoginSuccessful />}></Route>
           <Route path="*" element={<AnyPage />}></Route>
           {/* <Route path="/:code/:state" exact><LoginSuccessful /></Route> */}
-          <Route path="/loginSuccessful/:code/:state" exact component={<LoginSuccessful/>} />;
+          <Route  path="/loginSuccessful/:code/:state" exact component={<LoginSuccessful/>} />;
 
           
         </Routes>
