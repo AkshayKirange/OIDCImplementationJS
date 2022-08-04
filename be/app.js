@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const https = require('https');
+const base64url = require('base64url');
+
 
 const app = express();
 app.use(cors('*'))
@@ -10,12 +12,14 @@ app.use(express.json())
 var codeVerifierGlobal;
 var clientIdGlobal;
 var nonceValueGlobal;
+var jweGlobal;
 
 
 // import cryptoRandomString from 'crypto-random-string';
 //const cryptoRandomString = require('crypto-random-string');
 
 const { default: axios } = require('axios');
+const { send } = require('process');
 
 // app.get('/api', (req, res) => {
 //     res.json({
@@ -59,6 +63,9 @@ app.post('/linkURL', (request, response) => {
         .digest("base64");
 
     const codeChallenge = base64url.fromBase64(base64Digest);
+    // const codeChallenge = base64urlEncode(SHA256(ASCII(codeVerifier)));
+
+
 
     const codeChallengeMethod = "S256";
     //     input value will be string of
@@ -107,35 +114,40 @@ app.post('/loginSuccessful', (req, res) => {
     console.log("in loginSuccessful api");
     console.log("authCode => " + authCode);
     console.log("stateId => " + stateId);
-    const tokenRequestLink = "https://up.epramaan.in/openid/jwt/processJwtAuthGrantRequest.do";
-    var body = {
-        "code": authCode,
-        "grant_type": ["authorization_code"],
-        "scope": ["openid"],
-        "redirect_uri": ["https://up.epramaan.in/openid/jwt/processJwtTokenRequest.do"],
-        "request_uri": ["http://localhost:5050/loginSuccessful"],
-        "code_verifier": codeVerifierGlobal,
-        "client_id": clientIdGlobal
-    }
 
-    const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
-    const  result = axios.post(
-        `${tokenRequestLink}`,
-        body,
-        {
-            httpsAgent: new https.Agent({
-                rejectUnauthorized: false
-            })
-        }
-    )
-        .then(function (response) {
-            console.log(response.data);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    //Trial method
+    // const tokenRequestLink = "https://up.epramaan.in/openid/jwt/processJwtTokenRequest.do";
+    // var body = {
+    //     "code": authCode,
+    //     "grant_type": ["authorization_code"],
+    //     "scope": ["openid"],
+    //     "redirect_uri": ["https://up.epramaan.in/openid/jwt/processJwtTokenRequest.do"],
+    //     "request_uri": ["http://localhost:5050/loginSuccessful"],
+    //     "code_verifier": codeVerifierGlobal,
+    //     "client_id": clientIdGlobal
+    // }
 
+    // const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+
+    // const result = axios.post(
+    //     `${tokenRequestLink}`,
+    //     body,
+    //     {
+    //         httpsAgent: new https.Agent({
+    //             rejectUnauthorized: false
+    //         })
+    //     }
+    // )
+    //     .then(function (response) {
+    //         console.log(response.data);
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });
+
+
+        //Trial method
     // axios({
     //     method: 'POST',
     //     url: tokenRequestLink,
@@ -147,15 +159,69 @@ app.post('/loginSuccessful', (req, res) => {
     //     .catch(function (error) {
     //         console.log(error);
     //     });
+    //const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+    var axios = require('axios');
+    var data = JSON.stringify({
+        "code": [
+            authCode
+        ],
+        "grant_type": [
+            "authorization_code"
+        ],
+        "scope": [
+            "openid"
+        ],
+        "redirect_uri": [
+            "http://up.epramaan.in/openid/jwt/processJwtTokenRequest.do"
+        ],
+        "request_uri": [
+            "http://localhost:5050/loginSuccessful"
+        ],
+        "code_verifier": [
+            codeVerifierGlobal
+        ],
+        "client_id": [
+            "100000921"
+        ]
+    });
+
+    var config = {
+        method: 'post',
+        url: 'http://up.epramaan.in/openid/jwt/processJwtTokenRequest.do',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': 'upid=97AD1F97013A0F3018C846BE9D121A72'
+        },
+        data: data,
+        // body:
+        //     {
+        //         httpsAgent: new https.Agent({
+        //             rejectUnauthorized: false
+        //         })
+        //     }
+    };
+
+    axios(config)
+        .then(function (response) {
+            
+            console.log("JWE = " + JSON.stringify(response.data));
+            jweGlobal = JSON.stringify(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+        
 });
 
 
 
 
-app.get('/codechallenge1', (req, res) => {
 
-    console.log('codeVerifierGlobal => ' + codeVerifierGlobal);
-    res.send(codeVerifierGlobal);
+app.post('/getJWT', (request, response) => {
+
+    console.log('jwe => ' + jweGlobal);
+    response.send(jweGlobal);
 
 })
 

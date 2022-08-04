@@ -7,6 +7,7 @@ import useParams, { Link } from "react-router-dom";
 
 export const LoginSuccessful = () => {
  
+  
   // const authCode = req.query.code;
   // const stateId = req.query.state;
   // console.log("in loginSuccessful api");
